@@ -1,7 +1,7 @@
 # NoteTakker
 *Note in peace!*
 
-NoteTakker AI is a modern, AI-powered web application that transforms your audio recordings (meetings, lectures, voice memos) into accurate text transcriptions, smart summaries, and actionable tasks. Built with a decoupled architecture using a .NET Web API backend and a Next.js frontend, it leverages the power of Google's Gemini AI via Microsoft's Semantic Kernel.
+NoteTakker is a modern, AI-powered web application that transforms your audio recordings (meetings, lectures, voice memos) into accurate text transcriptions, smart summaries, and actionable tasks. Built with a decoupled architecture using a .NET Web API backend and a Next.js frontend, it leverages the power of Google's Gemini AI (other models accepted, edit in your own .env) via Microsoft's Semantic Kernel.
 
 ## Features
 
