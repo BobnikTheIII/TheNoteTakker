@@ -24,14 +24,7 @@ NoteTakker is a modern, AI-powered web application that transforms your audio re
 - [Microsoft Semantic Kernel](https://github.com/microsoft/semantic-kernel) (AI Orchestration)
 - [Google Gemini API](https://ai.google.dev/) (Model: `gemini-3.1-flash-lite`)
 
-## Getting Started
-
 ### Prerequisites
 - Node.js and `pnpm` (v10+ recommended)
 - .NET 8.0 SDK (or newer)
 - A valid Google Gemini API Key
-
-### Backend Setup (.NET)
-1. Navigate to the backend directory:
-   ```bash
-   cd NoteTakker.Api
