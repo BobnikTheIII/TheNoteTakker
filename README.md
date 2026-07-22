@@ -22,9 +22,67 @@ NoteTakker is a modern, AI-powered web application that transforms your audio re
 **Backend:**
 - [.NET Web API](https://dotnet.microsoft.com/) (C# Minimal APIs)
 - [Microsoft Semantic Kernel](https://github.com/microsoft/semantic-kernel) (AI Orchestration)
-- [Google Gemini API](https://ai.google.dev/) (Model: `gemini-3.1-flash-lite`)
+- [Google Gemini API](https://ai.google.dev/) (model configurable via the `LLM_MODEL` env var, e.g. `gemini-3.1-flash-lite`)
+
+## Project Structure
+
+```
+TheNoteTakker/
+  NoteTakker.Api/     # .NET minimal-API backend (transcribe + generate-notes)
+  notetakkerapp/      # Next.js frontend (the web UI)
+  NoteTakker/         # standalone console prototype (early transcription experiment)
+```
+
+## Getting Started
 
 ### Prerequisites
 - Node.js and `pnpm` (v10+ recommended)
 - .NET 8.0 SDK (or newer)
 - A valid Google Gemini API Key
+
+### 1. Backend (`NoteTakker.Api`)
+
+Create a `.env` file inside `NoteTakker.Api/`:
+
+```bash
+API_KEY=your_google_gemini_api_key
+LLM_MODEL=gemini-3.1-flash-lite
+```
+
+Then run the API:
+
+```bash
+cd NoteTakker.Api
+dotnet run
+```
+
+The API starts on **http://localhost:5095** (Swagger UI is available at
+`/swagger` in Development). CORS is preconfigured to allow the frontend at
+`http://localhost:3000`.
+
+### 2. Frontend (`notetakkerapp`)
+
+```bash
+cd notetakkerapp
+pnpm install
+pnpm dev
+```
+
+Open **http://localhost:3000**. The UI calls the backend at
+`http://localhost:5095`, so keep the API running.
+
+## API
+
+| Method | Endpoint | Body | Returns |
+|---|---|---|---|
+| `POST` | `/transcribe` | `multipart/form-data` with a `file` (audio) | `{ transcript }` |
+| `POST` | `/generate-notes` | JSON `{ transcript, customPrompt? }` | `{ summary, actionItems: [{ task, assignee }] }` |
+
+## Usage
+
+1. Drag & drop (or select) an audio file and click **Transcribe** — the backend
+   returns a clean transcript.
+2. Review/edit the transcript, optionally add a **custom prompt** telling the AI
+   how to process it, and generate notes.
+3. Read the **summary** and extracted **action items**, then export everything to
+   a `.txt` file.
